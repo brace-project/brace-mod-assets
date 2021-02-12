@@ -46,12 +46,18 @@ class VirtualAsset implements RequestHandlerInterface
     {
         $data = "";
         foreach ($this->content as $c) {
-            if (isset($c["filename"]))
+            if (isset($c["filename"])) {
+                if ( ! file_exists($c["filename"]))
+                    throw new \InvalidArgumentException("Cannot load asset '{$c['filename']}' in assetset.");
                 $data .= file_get_contents($c["filename"]);
+
+            }
             if (isset($c["data"]))
                 $data .= $c["data"];
         }
         $resp = $this->app->responseFactory->createResponseWithBody($data, 200);
-        return $resp->withHeader("Content-Type", $this->contentType);
+        if ($this->contentType !== null)
+            $resp = $resp->withHeader("Content-Type", $this->contentType);
+        return $resp;
     }
 }
