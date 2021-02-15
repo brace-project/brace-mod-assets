@@ -12,17 +12,13 @@ use Psr\Http\Server\RequestHandlerInterface;
 class VirtualAsset implements RequestHandlerInterface
 {
 
-
-    private $app;
-
     private $contentType;
 
     private $content = [];
 
-    public function __construct (BraceApp $app)
-    {
-        $this->app = $app;
-    }
+    public function __construct (
+        private BraceApp $app
+    ){}
 
     public function setContentType(string $contentType) : self
     {

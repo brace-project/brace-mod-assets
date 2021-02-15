@@ -17,15 +17,10 @@ class AssetSet implements RequestHandlerInterface
      */
     private $assets = [];
 
-    /**
-     * @var BraceApp
-     */
-    private $app;
 
-    public function __construct (BraceApp $app)
-    {
-        $this->app = $app;
-    }
+    public function __construct (
+        private BraceApp $app
+    ) {}
 
     public function virtual(string $route, string $contentType = null) : VirtualAsset
     {
