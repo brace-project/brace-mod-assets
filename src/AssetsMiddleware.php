@@ -27,8 +27,10 @@ class AssetsMiddleware extends BraceAbstractMiddleware
     {
         foreach ($this->assetRoutes as $assetRoute) {
             if (str_starts_with($request->getUri()->getPath(), $assetRoute)) {
-                $this->app->assets->handle($request);
+                return $this->app->assets->handle($request);
+
             }
         }
+        return $handler->handle($request);
     }
 }

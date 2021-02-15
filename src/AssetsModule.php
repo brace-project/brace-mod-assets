@@ -13,6 +13,6 @@ class AssetsModule implements BraceModule
 
     public function register(BraceApp $app)
     {
-        $app->define("assets", new DiValue( new AssetSet()));
+        $app->define("assets", new DiValue( new AssetSet($app)));
     }
 }
